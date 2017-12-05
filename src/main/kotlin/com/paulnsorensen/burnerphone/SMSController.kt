@@ -1,4 +1,4 @@
-package uk.co.placona.BurnerPhones
+package com.paulnsorensen.burnerphone
 
 import com.twilio.twiml.Body
 import com.twilio.twiml.Message
@@ -8,12 +8,13 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RequestMapping("/sms")
-@RestController class SMSController {
+@RestController
+class SMSController {
     @RequestMapping(value = "/")
     fun helloSpringBoot() = "A nice looking sms controller"
 
     @RequestMapping(value = "/forwardSMS", produces = arrayOf("text/xml"))
-    fun forwardSMS(@RequestParam(value = "From") from: String, @RequestParam(value = "Body") body: String): String{
+    fun forwardSMS(@RequestParam(value = "From") from: String, @RequestParam(value = "Body") body: String): String {
         val message = Message.Builder()
                 .to(System.getProperty("MY_NUMBER"))
                 .body(Body("Message from: $from \n $body")).build()

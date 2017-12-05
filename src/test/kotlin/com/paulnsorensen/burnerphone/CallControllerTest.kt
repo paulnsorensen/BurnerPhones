@@ -1,3 +1,5 @@
+package com.paulnsorensen.burnerphone
+
 import org.assertj.core.api.Assertions.assertThat
 import org.hamcrest.Matchers.containsString
 import org.junit.Before
@@ -13,7 +15,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers.print
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
-import uk.co.placona.BurnerPhones.CallController
 
 
 @RunWith(SpringRunner::class)
@@ -24,7 +25,7 @@ class CallControllerTest {
     lateinit var controller: CallController
 
     @Before
-    fun setup(){
+    fun setup() {
         MockitoAnnotations.initMocks(this)
         mockMvc = MockMvcBuilders.standaloneSetup(controller).build()
 
@@ -33,7 +34,7 @@ class CallControllerTest {
 
     @Test
     @Throws(Exception::class)
-    fun contextLoads(){
+    fun contextLoads() {
         assertThat(controller).isNotNull();
     }
 

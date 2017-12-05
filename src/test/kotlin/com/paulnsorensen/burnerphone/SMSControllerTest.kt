@@ -1,3 +1,5 @@
+package com.paulnsorensen.burnerphone
+
 import org.assertj.core.api.Assertions.assertThat
 import org.hamcrest.Matchers.containsString
 import org.junit.Before
@@ -13,8 +15,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers.print
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
-import uk.co.placona.BurnerPhones.SMSController
-
 
 @RunWith(SpringRunner::class)
 class SMSControllerTest {
@@ -24,7 +24,7 @@ class SMSControllerTest {
     lateinit var controller: SMSController
 
     @Before
-    fun setup(){
+    fun setup() {
         MockitoAnnotations.initMocks(this)
         mockMvc = MockMvcBuilders.standaloneSetup(controller).build()
 
@@ -33,7 +33,7 @@ class SMSControllerTest {
 
     @Test
     @Throws(Exception::class)
-    fun contextLoads(){
+    fun contextLoads() {
         assertThat(controller).isNotNull();
     }
 
@@ -51,8 +51,8 @@ class SMSControllerTest {
         val expectedResult = "<Response><Message to=\"$toNumber\"><Body>Message from: +1234567890 \n This is a test message</Body></Message></Response>"
         mockMvc.perform(
                 post("/sms/forwardSMS")
-                    .param("From", "+1234567890")
-                    .param("Body", "This is a test message"))
+                        .param("From", "+1234567890")
+                        .param("Body", "This is a test message"))
                 .andDo(print())
                 .andExpect(status().isOk)
                 .andExpect(content().string(containsString(expectedResult)))
